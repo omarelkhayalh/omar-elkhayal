@@ -1,0 +1,855 @@
+{
+	"info": {
+		"_postman_id": "ea4ed073-9247-4edb-96bc-236ed63f7da2",
+		"name": "InstaBug-Task",
+		"description": "These requests showcase some of the things you can do with the API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response must be in the right shape\", function () {",
+							"    pm.expect(pm.response.json().data).to.be.an('array');",
+							"    pm.expect(pm.response.json().limit).to.be.a('number');",
+							"    pm.expect(pm.response.json().skip).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/products",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response must be in the right shape\", function () {",
+							"    pm.expect(pm.response.json().data).to.be.an('array');",
+							"    pm.expect(pm.response.json().limit).to.be.a('number');",
+							"    pm.expect(pm.response.json().skip).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get stores",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"response status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response must be in the right shape\", function () {",
+							"    pm.expect(pm.response.json().data).to.be.an('array');",
+							"    pm.expect(pm.response.json().limit).to.be.a('number');",
+							"    pm.expect(pm.response.json().skip).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/services",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Services",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 200\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response must be in the right shape\", function () {",
+							"    pm.expect(pm.response.json().data).to.be.an('array');",
+							"    pm.expect(pm.response.json().limit).to.be.a('number');",
+							"    pm.expect(pm.response.json().skip).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3030/stores",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomString = Math.random().toString(36).substring(2);",
+							"const randomNumber = Math.floor(Math.random() * 100) + 1",
+							"",
+							"pm.environment.set('name', `${randomString} ${randomString}`);",
+							"pm.environment.set('type', randomString);",
+							"pm.environment.set('upc', randomString);",
+							"pm.environment.set('price', randomNumber);",
+							"pm.environment.set('model', randomString);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 201\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal(pm.environment.get('name'))",
+							"    pm.expect(data.model).to.equal(pm.environment.get('model'))",
+							"    pm.expect(data.type).to.equal(pm.environment.get('type'))",
+							"    pm.expect(data.price).to.equal(pm.environment.get('price'))",
+							"    pm.expect(data.upc).to.equal(pm.environment.get('upc'))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"{{name}}\",\n\t\"type\": \"{{type}}\",\n\t\"upc\": \"{{upc}}\",\n\t\"price\": {{price}},\n\t\"description\": \"This is a placeholder request for creating a new product.\",\n\t\"model\": \"{{model}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Store",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t  \"name\": \"New Store\",\n      \"type\": \"BigBox\",\n      \"address\": \"123 Fake St\",\n      \"address2\": \"\",\n      \"city\": \"Springfield\",\n      \"state\": \"MN\",\n      \"zip\": \"55123\",\n      \"lat\": 44.969658,\n      \"lng\": -93.449539,\n      \"hours\": \"Mon: 10-9; Tue: 10-9; Wed: 10-9; Thurs: 10-9; Fri: 10-9; Sat: 10-9; Sun: 10-8\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomString = Math.random().toString(36).substring(2);",
+							"",
+							"pm.environment.set('name', randomString);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 201\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal(pm.environment.get('name'))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t  \"name\": \"{{name}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"const randomString = Math.random().toString(36).substring(2);",
+							"",
+							"pm.environment.set('id', randomString);",
+							"pm.environment.set('name', randomString);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 201\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"response should be okay to process\", () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.id).to.equal(pm.environment.get('id'))",
+							"    pm.expect(data.name).to.equal(pm.environment.get('name'))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \n\t\"id\": \"{{id}}\",\n\t\"name\": \"{{name}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/products/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Store",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/stores/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"stores",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Service",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/services/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/categories/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"categories",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/products/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Category",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/products/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Store",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/services/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"services",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Service",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const nonExistentID = 9999999;",
+							"",
+							"pm.environment.set('ID', nonExistentID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response status code is 404\", () => {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"response with exact data sent\", () => {",
+							"    const data = pm.response.json()",
+							"    pm.expect(data.name).to.equal('NotFound');",
+							"    pm.expect(data.message).to.equal(`No record found for id '${pm.environment.get('ID')}'`)",
+							"    pm.expect(data.className).to.equal('not-found')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/products/{{ID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"products",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
